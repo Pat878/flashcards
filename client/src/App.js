@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { Router, Route, Switch, HashRouter } from "react-router-dom";
+import { Route, Switch, HashRouter } from "react-router-dom";
 import { PropTypes } from "prop-types";
 
-var Routes = require("./components/Routes");
+var Navbar = require("./components/Navbar");
+var Main = require("./components/Main");
+var Index = require("./components/Index");
+var Footer = require("./components/Footer");
 var api = require("./utils/api");
 
 class App extends Component {
@@ -18,16 +21,31 @@ class App extends Component {
     this.setState(prevState => ({
       collapsed: !prevState.collapsed
     }));
-    console.log(true)
+    console.log(true);
   };
 
   render() {
     return (
       <div>
-        <Routes
+        <Navbar
           toggleHeader={this.toggleHeader}
           collapsed={this.state.collapsed}
         />
+        <div>
+          <HashRouter>
+            <div>
+              <Switch>
+                <Route exact path={"/"} render={props => <Main />} />
+                <Route
+                  render={function() {
+                    return <p>Not Found</p>;
+                  }}
+                />
+              </Switch>
+            </div>
+          </HashRouter>
+        </div>
+        <Footer />
       </div>
     );
   }

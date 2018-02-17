@@ -14,6 +14,24 @@
       "description":
         "Copies array elements within the array, to and from specified positions",
       "example": ""
+    },
+    {
+      "id": 3,
+      "method": "entries()",
+      "description": "Returns a key/value pair Array Iteration Object",
+      "example": ""
+    },
+    {
+      "id": 4,
+      "method": "every()",
+      "description": "Checks if every element in an array pass a test",
+      "example": ""
+    },
+    {
+      "id": 5,
+      "method": "fill()",
+      "description": "Fill the elements in an array with a static value",
+      "example": ""
     }
   ]
 ]

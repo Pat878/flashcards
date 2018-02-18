@@ -2,9 +2,9 @@ var React = require("react");
 //var PropTypes = require("prop-types");
 
 const Cards = props => {
-  const cards = props.response[0].map(card => {
+  const cards = props.response[props.cardIndex].map(card => {
     return (
-      <div className="col-md-4">
+      <div className="col-md-4" key={card.id}>
         <div className="card mb-4 box-shadow">
           <img
             className="card-img-top"

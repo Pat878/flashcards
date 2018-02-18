@@ -21,7 +21,8 @@ class App extends Component {
     startingCards: ["Array"],
     response: [],
     loading: true,
-    collapsed: true
+    collapsed: true,
+    cardIndex: null
   };
 
   componentDidMount = () => {
@@ -40,6 +41,11 @@ class App extends Component {
 
   showCardsRoute = () => {
     history.push("/cards");
+  };
+
+  setCardIndex = i => {
+    this.setState({ cardIndex: i });
+    this.showCardsRoute();
   };
 
   render() {
@@ -61,6 +67,7 @@ class App extends Component {
                     <CardIndex
                       startingCards={this.state.startingCards}
                       showCardsRoute={this.showCardsRoute}
+                      setCardIndex={this.setCardIndex}
                     />
                   )}
                 />
@@ -74,6 +81,7 @@ class App extends Component {
                       <Cards
                         response={this.state.response}
                         showCardsRoute={this.showCardsRoute}
+                        cardIndex={this.state.cardIndex}
                       />
                     )
                   }

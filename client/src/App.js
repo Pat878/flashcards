@@ -22,7 +22,9 @@ class App extends Component {
     response: [],
     loading: true,
     collapsed: true,
-    cardIndex: null
+    cardIndex: null,
+    answer: true,
+    cardId: 0
   };
 
   componentDidMount = () => {
@@ -36,7 +38,6 @@ class App extends Component {
     this.setState(prevState => ({
       collapsed: !prevState.collapsed
     }));
-    console.log(true);
   };
 
   showCardsRoute = () => {
@@ -46,6 +47,24 @@ class App extends Component {
   setCardIndex = i => {
     this.setState({ cardIndex: i });
     this.showCardsRoute();
+  };
+
+  flipCard = () => {
+    this.setState(prevState => ({
+      answer: !prevState.answer
+    }));
+  };
+
+  nextCard = () => {
+    var currentCardId = this.state.cardId;
+    var cardSetLength = this.state.response[this.state.cardIndex].length;
+
+    if (currentCardId <= cardSetLength - 1) {
+      this.setState({ cardId: (currentCardId += 1) });
+    }
+    if (currentCardId == cardSetLength) {
+      this.setState({ cardId: 0 });
+    }
   };
 
   render() {
@@ -82,6 +101,10 @@ class App extends Component {
                         response={this.state.response}
                         showCardsRoute={this.showCardsRoute}
                         cardIndex={this.state.cardIndex}
+                        flipCard={this.flipCard}
+                        answer={this.state.answer}
+                        cardId={this.state.cardId}
+                        nextCard={this.nextCard}
                       />
                     )
                   }

@@ -12,9 +12,18 @@ const Cards = props => {
             alt="Card image cap"
           />
           <div className="card-body">
-            <p className="card-text">{card.method}</p>
+            <p className="card-text">
+              {props.answer ? card.method : card.description}
+            </p>
             <div className="d-flex justify-content-between align-items-center">
               <div className="btn-group" />
+              <button
+                type="button"
+                className="btn btn-sm btn-outline-secondary"
+                onClick={props.flipCard}
+              >
+                Flip Card
+              </button>
               <small className="text-muted">9 mins</small>
             </div>
           </div>
@@ -27,7 +36,8 @@ const Cards = props => {
     <div className="album py-5 bg-light">
       <div className="container">
         {" "}
-        <div className="row">{cards}</div>{" "}
+        <div className="row">{cards[props.cardId]}</div>{" "}
+        <button onClick={props.nextCard}>Next</button>
       </div>
     </div>
   );

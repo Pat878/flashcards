@@ -62,8 +62,22 @@ class App extends Component {
     if (currentCardId <= cardSetLength - 1) {
       this.setState({ cardId: (currentCardId += 1) });
     }
+
     if (currentCardId == cardSetLength) {
       this.setState({ cardId: 0 });
+    }
+  };
+
+  previousCard = () => {
+    var currentCardId = this.state.cardId;
+    var cardSetLength = this.state.response[this.state.cardIndex].length;
+
+    if (currentCardId <= cardSetLength - 1) {
+      this.setState({ cardId: (currentCardId -= 1) });
+    }
+
+    if (currentCardId == -1) {
+      this.setState({ cardId: cardSetLength - 1 });
     }
   };
 
@@ -105,6 +119,7 @@ class App extends Component {
                         answer={this.state.answer}
                         cardId={this.state.cardId}
                         nextCard={this.nextCard}
+                        previousCard={this.previousCard}
                       />
                     )
                   }

@@ -38,6 +38,7 @@ const Cards = props => {
         {" "}
         <div className="row">{cards[props.cardId]}</div>{" "}
         <button onClick={props.nextCard}>Next</button>
+        <button onClick={props.previousCard}>Back</button>
       </div>
     </div>
   );

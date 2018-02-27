@@ -56,8 +56,8 @@ class App extends Component {
   };
 
   nextCard = () => {
-    var currentCardId = this.state.cardId;
-    var cardSetLength = this.state.response[this.state.cardIndex].length;
+    let currentCardId = this.state.cardId;
+    let cardSetLength = this.state.response[this.state.cardIndex].length;
 
     if (currentCardId <= cardSetLength - 1) {
       this.setState({ cardId: (currentCardId += 1) });
@@ -69,8 +69,8 @@ class App extends Component {
   };
 
   previousCard = () => {
-    var currentCardId = this.state.cardId;
-    var cardSetLength = this.state.response[this.state.cardIndex].length;
+    let currentCardId = this.state.cardId;
+    let cardSetLength = this.state.response[this.state.cardIndex].length;
 
     if (currentCardId <= cardSetLength - 1) {
       this.setState({ cardId: (currentCardId -= 1) });

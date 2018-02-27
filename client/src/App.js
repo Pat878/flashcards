@@ -81,6 +81,10 @@ class App extends Component {
     }
   };
 
+  goBack = () => {
+    history.push("/");
+  };
+
   render() {
     return (
       <div>
@@ -120,6 +124,7 @@ class App extends Component {
                         cardId={this.state.cardId}
                         nextCard={this.nextCard}
                         previousCard={this.previousCard}
+                        goBack={this.goBack}
                       />
                     )
                   }

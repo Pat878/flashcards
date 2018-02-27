@@ -27,11 +27,20 @@ const Cards = props => {
         </div>
         <center>
           <div className="btn-group" role="group">
-            <button className="btn btn-default" onClick={props.previousCard}>
-              Back
+            <button
+              className="btn btn-outline-secondary"
+              onClick={props.previousCard}
+            >
+              <i class="fa fa-angle-left fa-3x" />
             </button>
-            <button className="btn btn-default" onClick={props.nextCard}>
-              Next
+            <button className="btn btn-outline-primary" onClick={props.goBack}>
+              Home
+            </button>
+            <button
+              className="btn btn-outline-secondary"
+              onClick={props.nextCard}
+            >
+              <i class="fa fa-angle-right fa-3x" />
             </button>
           </div>
         </center>

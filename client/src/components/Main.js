@@ -12,14 +12,7 @@ const Main = props => {
             the creator, etc. Make it short and sweet, but not too short so
             folks don't simply skip over it entirely.
           </p>
-          <p>
-            <a href="" className="btn btn-primary my-2" id="test">
-              Main call to action
-            </a>
-            <a href="" className="btn btn-secondary my-2">
-              Secondary action
-            </a>
-          </p>
+          <p />
         </div>
       </section>
     </main>

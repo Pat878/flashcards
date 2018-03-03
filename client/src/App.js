@@ -4,6 +4,7 @@ import "./App.css";
 import { Route, Switch, HashRouter } from "react-router-dom";
 import { PropTypes } from "prop-types";
 import { createHashHistory } from "history";
+import { CSSTransitionGroup } from "react-transition-group";
 
 var Navbar = require("./components/Navbar");
 var Main = require("./components/Main");

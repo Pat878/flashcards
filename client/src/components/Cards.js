@@ -1,5 +1,6 @@
 var React = require("react");
 //var PropTypes = require("prop-types");
+//var CSSTransitionGroup = require("react-transition-group").CSSTransitionGroup;
 
 const Cards = props => {
   const cards = props.response[props.cardIndex].map(card => {
@@ -7,13 +8,13 @@ const Cards = props => {
       <div className="col-md-4 offset-md-4" key={card.id}>
         <div className="card mb-4 box-shadow">
           <div className="card-body">
-            <p className="card-text">
-              <h1>{card.method} </h1>
-              <hr />
-              {props.answer ? "" : card.description}
-            </p>
+            <h1 className="card-text">{card.method} </h1>
+            <hr />
+            {props.answer ? "" : card.description}
+
             <div className="d-flex justify-content-between align-items-center">
               <center>
+                <br />{" "}
                 <button
                   type="button"
                   className="btn btn-sm btn-outline-secondary"
@@ -31,7 +32,7 @@ const Cards = props => {
               className="btn btn-outline-secondary"
               onClick={props.previousCard}
             >
-              <i class="fa fa-angle-left fa-3x" />
+              <i className="fa fa-angle-left fa-3x" />
             </button>
             <button className="btn btn-outline-primary" onClick={props.goBack}>
               Home
@@ -40,7 +41,7 @@ const Cards = props => {
               className="btn btn-outline-secondary"
               onClick={props.nextCard}
             >
-              <i class="fa fa-angle-right fa-3x" />
+              <i className="fa fa-angle-right fa-3x" />
             </button>
           </div>
         </center>

@@ -4,10 +4,7 @@ var React = require("react");
 const Navbar = props => {
   return (
     <header>
-      <div
-        className={"collapse bg-dark " + (props.collapsed ? "" : "show")}
-        id="navbarHeader"
-      >
+      <div className={props.collapsed ? "hidden" : "show"}>
         <div className="container">
           <div className="row">
             <div className="col-sm-8 col-md-7 py-4">

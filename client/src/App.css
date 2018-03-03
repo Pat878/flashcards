@@ -39,3 +39,19 @@ footer p {
 .box-shadow {
   box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
 }
+
+.show {
+  overflow-y: hidden;
+  background: #343a40;
+  height: 196px;
+  width: auto;
+  transition: max-height 0.3s ease-out;
+  max-height: 196px;
+}
+
+.hidden {
+  overflow-y: hidden;
+  background: #343a40;
+  transition: max-height 0.3s ease-out;
+  max-height: 0px;
+}

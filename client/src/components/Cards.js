@@ -1,29 +1,34 @@
 var React = require("react");
 //var PropTypes = require("prop-types");
-//var CSSTransitionGroup = require("react-transition-group").CSSTransitionGroup;
 
 const Cards = props => {
   const cards = props.response[props.cardIndex].map(card => {
+    const cardText = (
+      <div>
+        <h1 className="card-text">{card.method}</h1>
+        <hr />
+        {props.answer ? "" : card.description}
+        <div className="d-flex justify-content-between align-items-center">
+          <center>
+            <br />
+            <button
+              type="button"
+              className="btn btn-sm btn-outline-secondary"
+              onClick={props.flipCard}
+            >
+              {props.answer ? "Reveal Answer" : "Hide Answer"}
+            </button>
+          </center>
+        </div>
+      </div>
+    );
     return (
       <div className="col-md-4 offset-md-4" key={card.id}>
-        <div className="card mb-4 box-shadow">
-          <div className="card-body">
-            <h1 className="card-text">{card.method} </h1>
-            <hr />
-            {props.answer ? "" : card.description}
-
-            <div className="d-flex justify-content-between align-items-center">
-              <center>
-                <br />{" "}
-                <button
-                  type="button"
-                  className="btn btn-sm btn-outline-secondary"
-                  onClick={props.flipCard}
-                >
-                  {props.answer ? "Reveal Answer" : "Hide Answer"}
-                </button>
-              </center>
-            </div>
+        <div
+          className={"card mb-4 box-shadow " + (props.answer ? "" : "flipped")}
+        >
+          <div className={props.answer ? "card-body" : "card-body back"}>
+            {cardText}
           </div>
         </div>
         <center>

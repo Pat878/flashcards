@@ -7,7 +7,7 @@ const Cards = props => {
       <div>
         <h1 className="card-text">{card.method}</h1>
         <hr />
-        {props.answer ? "" : card.description}
+        {props.hideAnswer ? "" : card.description}
         <div className="d-flex justify-content-between align-items-center">
           <center>
             <br />
@@ -16,7 +16,7 @@ const Cards = props => {
               className="btn btn-sm btn-outline-secondary"
               onClick={props.flipCard}
             >
-              {props.answer ? "Reveal Answer" : "Hide Answer"}
+              {props.hideAnswer ? "Reveal Answer" : "Hide Answer"}
             </button>
           </center>
         </div>
@@ -25,9 +25,9 @@ const Cards = props => {
     return (
       <div className="col-md-4 offset-md-4" key={card.id}>
         <div
-          className={"card mb-4 box-shadow " + (props.answer ? "" : "flipped")}
+          className={"card mb-4 box-shadow " + (props.hideAnswer ? "" : "flipped")}
         >
-          <div className={props.answer ? "card-body" : "card-body back"}>
+          <div className={props.hideAnswer ? "card-body" : "card-body back"}>
             {cardText}
           </div>
         </div>

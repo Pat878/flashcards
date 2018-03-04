@@ -55,3 +55,17 @@ footer p {
   transition: max-height 0.3s ease-out;
   max-height: 0px;
 }
+
+.card {
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+
+.card .back {
+  transform: rotateY(180deg);
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+  overflow-y: hidden;
+}

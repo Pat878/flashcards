@@ -24,7 +24,7 @@ class App extends Component {
     loading: true,
     collapsed: true,
     cardIndex: null,
-    answer: true,
+    hideAnswer: true,
     cardId: 0
   };
 
@@ -52,7 +52,7 @@ class App extends Component {
 
   flipCard = () => {
     this.setState(prevState => ({
-      answer: !prevState.answer
+      hideAnswer: !prevState.hideAnswer
     }));
   };
 
@@ -84,6 +84,9 @@ class App extends Component {
 
   goBack = () => {
     history.push("/");
+    if (!this.state.hideAnswer) {
+      this.setState({ hideAnswer: true });
+    }
   };
 
   render() {
@@ -121,7 +124,7 @@ class App extends Component {
                         showCardsRoute={this.showCardsRoute}
                         cardIndex={this.state.cardIndex}
                         flipCard={this.flipCard}
-                        answer={this.state.answer}
+                        hideAnswer={this.state.hideAnswer}
                         cardId={this.state.cardId}
                         nextCard={this.nextCard}
                         previousCard={this.previousCard}

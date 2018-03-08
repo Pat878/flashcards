@@ -1,5 +1,6 @@
 var React = require("react");
 //var PropTypes = require("prop-types");
+var Notes = require("./Notes");
 
 const Cards = props => {
   const cards = props.response[props.cardIndex].map(card => {
@@ -18,6 +19,12 @@ const Cards = props => {
             >
               {props.hideAnswer ? "Reveal Answer" : "Hide Answer"}
             </button>
+            <button
+              className="btn btn-sm btn-outline-secondary"
+              onClick={props.handleShow}
+            >
+              Notes
+            </button>
           </center>
         </div>
       </div>
@@ -25,40 +32,58 @@ const Cards = props => {
     return (
       <div className="col-md-4 offset-md-4" key={card.id}>
         <div
-          className={"card mb-4 box-shadow " + (props.hideAnswer ? "" : "flipped")}
+          className={
+            "card mb-4 box-shadow " + (props.hideAnswer ? "" : "flipped")
+          }
         >
           <div className={props.hideAnswer ? "card-body" : "card-body back"}>
             {cardText}
           </div>
         </div>
-        <center>
-          <div className="btn-group" role="group">
-            <button
-              className="btn btn-outline-secondary"
-              onClick={props.previousCard}
-            >
-              <i className="fa fa-angle-left fa-3x" />
-            </button>
-            <button className="btn btn-outline-primary" onClick={props.goBack}>
-              Home
-            </button>
-            <button
-              className="btn btn-outline-secondary"
-              onClick={props.nextCard}
-            >
-              <i className="fa fa-angle-right fa-3x" />
-            </button>
-          </div>
-        </center>
       </div>
     );
   });
+
+  const navButtons = (
+    <div className="col-md-4 offset-md-4" key="{card.id}">
+      <center>
+        <div className="btn-group" role="group">
+          <button
+            className="btn btn-outline-secondary"
+            onClick={props.previousCard}
+          >
+            <i className="fa fa-angle-left fa-3x" />
+          </button>
+          <button className="btn btn-outline-primary" onClick={props.goBack}>
+            Home
+          </button>
+          <button
+            className="btn btn-outline-secondary"
+            onClick={props.nextCard}
+          >
+            <i className="fa fa-angle-right fa-3x" />
+          </button>
+        </div>
+      </center>
+    </div>
+  );
 
   return (
     <div className="album py-5 bg-light">
       <div className="container">
         {" "}
-        <div className="row">{cards[props.cardId]}</div>{" "}
+        <div className="row">
+          {props.showNotes ? (
+            <Notes
+              response={props.response}
+              cardIndex={props.cardIndex}
+              cardId={props.cardId}
+            />
+          ) : (
+            cards[props.cardId]
+          )}
+          {navButtons}
+        </div>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import "./App.css";
 import { Route, Switch, HashRouter } from "react-router-dom";
 import { PropTypes } from "prop-types";
 import { createHashHistory } from "history";
-import { CSSTransitionGroup } from "react-transition-group";
+import { Modal } from "react-bootstrap";
 
 var Navbar = require("./components/Navbar");
 var Main = require("./components/Main");
@@ -25,7 +25,8 @@ class App extends Component {
     collapsed: true,
     cardIndex: null,
     hideAnswer: true,
-    cardId: 0
+    cardId: 0,
+    showNotes: false
   };
 
   componentDidMount = () => {
@@ -89,6 +90,12 @@ class App extends Component {
     }
   };
 
+  toggleNotes = () => {
+    this.setState(prevState => ({
+      showNotes: !prevState.showNotes
+    }));
+  };
+
   render() {
     return (
       <div>
@@ -129,6 +136,8 @@ class App extends Component {
                         nextCard={this.nextCard}
                         previousCard={this.previousCard}
                         goBack={this.goBack}
+                        toggleNotes={this.toggleNotes}
+                        showNotes={this.state.showNotes}
                       />
                     )
                   }

@@ -21,7 +21,7 @@ const Cards = props => {
             </button>
             <button
               className="btn btn-sm btn-outline-secondary"
-              onClick={props.handleShow}
+              onClick={props.toggleNotes}
             >
               Notes
             </button>
@@ -78,6 +78,7 @@ const Cards = props => {
               response={props.response}
               cardIndex={props.cardIndex}
               cardId={props.cardId}
+              toggleNotes={props.toggleNotes}
             />
           ) : (
             cards[props.cardId]

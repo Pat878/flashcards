@@ -4,7 +4,7 @@ import "./App.css";
 import { Route, Switch, HashRouter } from "react-router-dom";
 import { PropTypes } from "prop-types";
 import { createHashHistory } from "history";
-import { Modal } from "react-bootstrap";
+import update from "immutability-helper";
 
 var Navbar = require("./components/Navbar");
 var Main = require("./components/Main");
@@ -19,14 +19,15 @@ var history = createHashHistory();
 
 class App extends Component {
   state = {
-    startingCards: ["Array"],
+    startingCards: ["Array", "String"],
     response: [],
     loading: true,
     collapsed: true,
     cardIndex: null,
     hideAnswer: true,
     cardId: 0,
-    showNotes: false
+    showNotes: false,
+    notes: ""
   };
 
   componentDidMount = () => {
@@ -62,10 +63,10 @@ class App extends Component {
     let cardSetLength = this.state.response[this.state.cardIndex].length;
 
     if (currentCardId <= cardSetLength - 1) {
-      this.setState({ cardId: (currentCardId += 1) });
+      this.setState({ cardId: currentCardId + 1 });
     }
 
-    if (currentCardId == cardSetLength) {
+    if (currentCardId == cardSetLength - 1) {
       this.setState({ cardId: 0 });
     }
   };
@@ -75,10 +76,10 @@ class App extends Component {
     let cardSetLength = this.state.response[this.state.cardIndex].length;
 
     if (currentCardId <= cardSetLength - 1) {
-      this.setState({ cardId: (currentCardId -= 1) });
+      this.setState({ cardId: currentCardId - 1 });
     }
 
-    if (currentCardId == -1) {
+    if (this.state.cardId == 0) {
       this.setState({ cardId: cardSetLength - 1 });
     }
   };
@@ -88,13 +89,53 @@ class App extends Component {
     if (!this.state.hideAnswer) {
       this.setState({ hideAnswer: true });
     }
+    this.setState({ cardId: 0, showNotes: false });
   };
 
   toggleNotes = () => {
     this.setState(prevState => ({
       showNotes: !prevState.showNotes
     }));
+    this.setNoteState();
   };
+
+  setNoteState = () => {
+    let cardId = this.state.cardId;
+    let cardIndex = this.state.cardIndex;
+    let notes = this.state.response[cardIndex][cardId].notes;
+    if (typeof notes != "undefined") {
+      this.setState({ notes: notes });
+    } else {
+      this.setState({ notes: "" });
+    }
+  };
+
+  inputNotes = e => {
+    this.setState({ notes: e.target.value });
+  };
+
+  handleUpdate = () => {
+    let cardCollection = { ...this.state.response };
+    let index = this.state.cardIndex;
+    let updatedCards = cardCollection[index];
+
+    for (let i = 0; i < updatedCards.length; i++) {
+      if (updatedCards[i].id === this.state.cardId + 1) {
+        updatedCards[i].notes = this.state.notes;
+      }
+    }
+
+    let newCardCollection = Object.assign([], cardCollection, {
+      index: updatedCards
+    });
+
+    this.setState({ response: newCardCollection });
+  };
+
+  /*  submitNotes = () => {
+    let card = this.state.response;
+    api.updateNotes(card);
+  }; */
 
   render() {
     return (
@@ -138,6 +179,10 @@ class App extends Component {
                         goBack={this.goBack}
                         toggleNotes={this.toggleNotes}
                         showNotes={this.state.showNotes}
+                        inputNotes={this.inputNotes}
+                        handleUpdate={this.handleUpdate}
+                        notes={this.state.notes}
+                        setNoteState={this.setNoteState}
                       />
                     )
                   }

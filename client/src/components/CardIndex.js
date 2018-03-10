@@ -7,7 +7,7 @@ const CardIndex = props => {
       <div className="col-md-4" key={card}>
         <div className="card mb-4 box-shadow">
           <div className="card-body">
-            <h1 className="card-text">{props.startingCards}</h1>
+            <h1 className="card-text">{props.startingCards[i]}</h1>
 
             <hr />
             <div className="d-flex justify-content-between align-items-center">

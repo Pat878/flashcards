@@ -48,21 +48,30 @@ const Cards = props => {
     <div className="col-md-4 offset-md-4" key="{card.id}">
       <center>
         <div className="btn-group" role="group">
-          <button
-            className="btn btn-outline-secondary"
-            onClick={props.previousCard}
-          >
-            <i className="fa fa-angle-left fa-3x" />
-          </button>
+          {props.showNotes ? (
+            ""
+          ) : (
+            <button
+              className="btn btn-outline-secondary"
+              onClick={props.previousCard}
+              id="previous"
+            >
+              <i className="fa fa-angle-left fa-3x" />
+            </button>
+          )}
           <button className="btn btn-outline-primary" onClick={props.goBack}>
             Home
           </button>
-          <button
-            className="btn btn-outline-secondary"
-            onClick={props.nextCard}
-          >
-            <i className="fa fa-angle-right fa-3x" />
-          </button>
+          {props.showNotes ? (
+            ""
+          ) : (
+            <button
+              className="btn btn-outline-secondary"
+              onClick={props.nextCard}
+            >
+              <i className="fa fa-angle-right fa-3x" />
+            </button>
+          )}
         </div>
       </center>
     </div>
@@ -79,6 +88,10 @@ const Cards = props => {
               cardIndex={props.cardIndex}
               cardId={props.cardId}
               toggleNotes={props.toggleNotes}
+              inputNotes={props.inputNotes}
+              handleUpdate={props.handleUpdate}
+              notes={props.notes}
+              setNoteState={props.setNoteState}
             />
           ) : (
             cards[props.cardId]

@@ -38,5 +38,14 @@
       "example": "",
       "notes": ""
     }
+  ],
+  [
+    {
+      "id": 1,
+      "method": "string",
+      "description": "strings",
+      "example": "",
+      "notes": ""
+    }
   ]
 ]

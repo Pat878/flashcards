@@ -16,14 +16,19 @@ const Notes = props => {
               X
             </button>
             <hr />
-            <textarea className="form-control" rows="5" />
+            <textarea
+              className="form-control"
+              rows="5"
+              onChange={props.inputNotes}
+              value={props.notes}
+            />
             <div className="d-flex justify-content-between align-items-center">
               <center>
                 <br />
 
                 <button
                   className="btn btn-sm btn-outline-secondary"
-                  onClick={props.toggleNotes}
+                  onClick={props.handleUpdate}
                 >
                   Save Notes
                 </button>

@@ -19,10 +19,18 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/api/hello", (req, res) => {
+app.get("/api/cards", (req, res) => {
   fs.readFile(DATA_FILE, (err, data) => {
     res.setHeader("Cache-Control", "no-cache");
     res.json(JSON.parse(data));
+  });
+});
+
+app.put("/api/update", (req, res) => {
+  const cards = req.body;
+
+  fs.writeFile(DATA_FILE, JSON.stringify(cards, null, 4), () => {
+    res.json(cards);
   });
 });
 

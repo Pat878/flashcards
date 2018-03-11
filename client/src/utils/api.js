@@ -14,5 +14,16 @@ module.exports = {
         card
       })
     }).then(response => response.json());
+  },
+
+  updateNotes(newCardCollection) {
+    return fetch("/api/update", {
+      method: "put",
+      body: JSON.stringify(newCardCollection),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    }).then(response => response.json());
   }
 };

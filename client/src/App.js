@@ -114,21 +114,39 @@ class App extends Component {
     this.setState({ notes: e.target.value });
   };
 
-  handleUpdate = () => {
-    let cardCollection = { ...this.state.response };
+  setCardObject = () => {
+    let cardCollection = this.state.response;
     let index = this.state.cardIndex;
-    let updatedCards = cardCollection[index];
+    let cardsToUpdate = cardCollection[index];
 
-    for (let i = 0; i < updatedCards.length; i++) {
-      if (updatedCards[i].id === this.state.cardId + 1) {
-        updatedCards[i].notes = this.state.notes;
+    let updatedCards = cardsToUpdate.map(card => {
+      if (card.id === this.state.cardId + 1) {
+        return Object.assign({}, card, {
+          notes: this.state.notes
+        });
+      } else {
+        return card;
       }
-    }
-
-    let newCardCollection = Object.assign([], cardCollection, {
-      index: updatedCards
     });
 
+    let newCardCollection = Object.assign([], cardCollection, {
+      [index]: updatedCards
+    });
+    return newCardCollection;
+  };
+
+  submitUpdate = () => {
+    api
+      .updateNotes(this.setCardObject())
+      .then(responseJson => {
+        this.handleUpdate(responseJson);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  handleUpdate = newCardCollection => {
     this.setState({ response: newCardCollection });
   };
 
@@ -183,6 +201,7 @@ class App extends Component {
                         handleUpdate={this.handleUpdate}
                         notes={this.state.notes}
                         setNoteState={this.setNoteState}
+                        submitUpdate={this.submitUpdate}
                       />
                     )
                   }

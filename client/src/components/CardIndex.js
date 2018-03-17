@@ -1,5 +1,5 @@
 var React = require("react");
-//var PropTypes = require("prop-types");
+var PropTypes = require("prop-types");
 
 const CardIndex = props => {
   const startingCards = props.startingCards.map((card, i) => {
@@ -34,6 +34,11 @@ const CardIndex = props => {
       </div>
     </div>
   );
+};
+
+CardIndex.propTypes = {
+  startingCards: PropTypes.array.isRequired,
+  setCardIndex: PropTypes.func.isRequired
 };
 
 module.exports = CardIndex;

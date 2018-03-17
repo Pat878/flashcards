@@ -1,4 +1,5 @@
 var React = require("react");
+var PropTypes = require("prop-types");
 
 const Notes = props => {
   return (
@@ -39,6 +40,18 @@ const Notes = props => {
       </div>
     </div>
   );
+};
+
+Notes.propTypes = {
+  response: PropTypes.array.isRequired,
+  cardIndex: PropTypes.number.isRequired,
+  cardId: PropTypes.number.isRequired,
+  toggleNotes: PropTypes.func.isRequired,
+  inputNotes: PropTypes.func.isRequired,
+  handleUpdate: PropTypes.func.isRequired,
+  notes: PropTypes.string.isRequired,
+  setNoteState: PropTypes.func.isRequired,
+  submitUpdate: PropTypes.func.isRequired
 };
 
 module.exports = Notes;

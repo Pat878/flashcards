@@ -116,8 +116,8 @@ class App extends Component {
 
   setCardObject = () => {
     let cardCollection = this.state.response;
-    let index = this.state.cardIndex;
-    let cardsToUpdate = cardCollection[index];
+    let cardIndex = this.state.cardIndex;
+    let cardsToUpdate = cardCollection[cardIndex];
 
     let updatedCards = cardsToUpdate.map(card => {
       if (card.id === this.state.cardId + 1) {
@@ -130,7 +130,7 @@ class App extends Component {
     });
 
     let newCardCollection = Object.assign([], cardCollection, {
-      [index]: updatedCards
+      [cardIndex]: updatedCards
     });
     return newCardCollection;
   };

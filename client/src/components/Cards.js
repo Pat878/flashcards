@@ -1,5 +1,5 @@
 var React = require("react");
-//var PropTypes = require("prop-types");
+var PropTypes = require("prop-types");
 var Notes = require("./Notes");
 
 const Cards = props => {
@@ -102,6 +102,18 @@ const Cards = props => {
       </div>
     </div>
   );
+};
+
+Cards.propTypes = {
+  response: PropTypes.array.isRequired,
+  cardIndex: PropTypes.number.isRequired,
+  hideAnswer: PropTypes.bool.isRequired,
+  toggleNotes: PropTypes.func.isRequired,
+  flipCard: PropTypes.func.isRequired,
+  previousCard: PropTypes.func.isRequired,
+  nextCard: PropTypes.func.isRequired,
+  goBack: PropTypes.func.isRequired,
+  showNotes: PropTypes.bool.isRequired
 };
 
 module.exports = Cards;

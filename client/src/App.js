@@ -4,11 +4,9 @@ import "./App.css";
 import { Route, Switch, HashRouter } from "react-router-dom";
 import { PropTypes } from "prop-types";
 import { createHashHistory } from "history";
-import update from "immutability-helper";
 
 var Navbar = require("./components/Navbar");
 var Main = require("./components/Main");
-var Index = require("./components/Index");
 var CardIndex = require("./components/CardIndex");
 var Cards = require("./components/Cards");
 var Loading = require("./components/Loading");
@@ -66,7 +64,7 @@ class App extends Component {
       this.setState({ cardId: currentCardId + 1 });
     }
 
-    if (currentCardId == cardSetLength - 1) {
+    if (currentCardId === cardSetLength - 1) {
       this.setState({ cardId: 0 });
     }
   };
@@ -79,7 +77,7 @@ class App extends Component {
       this.setState({ cardId: currentCardId - 1 });
     }
 
-    if (this.state.cardId == 0) {
+    if (this.state.cardId === 0) {
       this.setState({ cardId: cardSetLength - 1 });
     }
   };
@@ -103,7 +101,7 @@ class App extends Component {
     let cardId = this.state.cardId;
     let cardIndex = this.state.cardIndex;
     let notes = this.state.response[cardIndex][cardId].notes;
-    if (typeof notes != "undefined") {
+    if (typeof notes !== "undefined") {
       this.setState({ notes: notes });
     } else {
       this.setState({ notes: "" });

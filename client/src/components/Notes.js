@@ -28,7 +28,7 @@ const Notes = props => {
 
                 <button
                   className="btn btn-sm btn-outline-secondary"
-                  onClick={props.handleUpdate}
+                  onClick={props.submitUpdate}
                 >
                   Save Notes
                 </button>

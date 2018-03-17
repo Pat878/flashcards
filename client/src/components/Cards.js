@@ -92,6 +92,7 @@ const Cards = props => {
               handleUpdate={props.handleUpdate}
               notes={props.notes}
               setNoteState={props.setNoteState}
+              submitUpdate={props.submitUpdate}
             />
           ) : (
             cards[props.cardId]

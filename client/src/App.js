@@ -35,12 +35,6 @@ class App extends Component {
       .catch(err => console.log(err));
   };
 
-  toggleHeader = () => {
-    this.setState(prevState => ({
-      collapsed: !prevState.collapsed
-    }));
-  };
-
   showCardsRoute = () => {
     history.push("/cards");
   };

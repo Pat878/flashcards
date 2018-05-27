@@ -3,7 +3,7 @@ var PropTypes = require("prop-types");
 var Notes = require("./Notes");
 
 const Cards = props => {
-  const cards = props.response[props.cardIndex].map(card => {
+  const cards = props.response[props.cardIndex].content.map(card => {
     const cardText = (
       <div>
         <h1 className="card-text">{card.method}</h1>

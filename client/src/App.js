@@ -17,7 +17,7 @@ var history = createHashHistory();
 
 class App extends Component {
   state = {
-    startingCards: ["Array", "String"],
+    startingCards: [],
     response: [],
     loading: true,
     collapsed: true,
@@ -31,8 +31,22 @@ class App extends Component {
   componentDidMount = () => {
     api
       .getCardData()
-      .then(res => this.setState({ response: res, loading: false }))
+      .then(res =>
+        this.setState({
+          response: res,
+          loading: false,
+          startingCards: this.startingCards(res)
+        })
+      )
       .catch(err => console.log(err));
+  };
+
+  startingCards = res => {
+    let startingCards = [];
+    for (let i = 0; i < res.length; i++) {
+      startingCards.push(res[i].group);
+    }
+    return startingCards;
   };
 
   showCardsRoute = () => {
@@ -52,7 +66,8 @@ class App extends Component {
 
   nextCard = () => {
     let currentCardId = this.state.cardId;
-    let cardSetLength = this.state.response[this.state.cardIndex].length;
+    let cardSetLength = this.state.response[this.state.cardIndex].content
+      .length;
 
     if (currentCardId <= cardSetLength - 1) {
       this.setState({ cardId: currentCardId + 1 });
@@ -65,7 +80,8 @@ class App extends Component {
 
   previousCard = () => {
     let currentCardId = this.state.cardId;
-    let cardSetLength = this.state.response[this.state.cardIndex].length;
+    let cardSetLength = this.state.response[this.state.cardIndex].content
+      .length;
 
     if (currentCardId <= cardSetLength - 1) {
       this.setState({ cardId: currentCardId - 1 });
@@ -94,7 +110,7 @@ class App extends Component {
   setNoteState = () => {
     let cardId = this.state.cardId;
     let cardIndex = this.state.cardIndex;
-    let notes = this.state.response[cardIndex][cardId].notes;
+    let notes = this.state.response[cardIndex].content[cardId].notes;
     if (typeof notes !== "undefined") {
       this.setState({ notes: notes });
     } else {
@@ -109,7 +125,7 @@ class App extends Component {
   setCardObject = () => {
     let cardCollection = this.state.response;
     let cardIndex = this.state.cardIndex;
-    let cardsToUpdate = cardCollection[cardIndex];
+    let cardsToUpdate = cardCollection[cardIndex].content;
 
     let updatedCards = cardsToUpdate.map(card => {
       if (card.id === this.state.cardId + 1) {
@@ -121,8 +137,14 @@ class App extends Component {
       }
     });
 
-    let newCardCollection = Object.assign([], cardCollection, {
-      [cardIndex]: updatedCards
+    let newCardCollection = cardCollection.map((object, index) => {
+      if (index == cardIndex) {
+        return Object.assign({}, object, {
+          content: updatedCards
+        });
+      } else {
+        return object;
+      }
     });
     return newCardCollection;
   };
@@ -150,10 +172,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar
-          toggleHeader={this.toggleHeader}
-          collapsed={this.state.collapsed}
-        />
+        <Navbar />
         <Main />
         <div>
           <HashRouter>

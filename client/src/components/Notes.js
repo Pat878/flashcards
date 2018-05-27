@@ -8,7 +8,7 @@ const Notes = props => {
         <div className="card-body parent">
           <div>
             <h1 className="card-text">
-              {props.response[props.cardIndex][props.cardId].method}
+              {props.response[props.cardIndex].content[props.cardId].method}
             </h1>
             <button
               className="close btn btn-sm btn-outline-secondary"
